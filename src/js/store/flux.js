@@ -1,29 +1,22 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+
+
+			getContacts: async () => {
+				const res = await fetch('https://playground.4geeks.com/contact/agendas/Sergio')
+				const data = res.json()
+				console.log(data)
+				setStore({ contacts: data.contacts })
+
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
+
+
+
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
