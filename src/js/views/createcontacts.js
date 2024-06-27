@@ -1,17 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
 
-export const Demo = () => {
-    const { store, actions } = useContext(Context);
-
-    const details =store.contactToEdit;
-
+export const CreateContact = props => {
+	const { store, actions } = useContext(Context);
+    const details = store && store.currentUser ? store.currentUser : {};
     const [name, setName] = useState(details.name || "");
     const [email, setEmail] = useState(details.email || "");
     const [address, setAddress] = useState(details.address || "");
     const [phone, setPhone] = useState(details.phone || "");
-
     function handleSubmit(event) {
         event.preventDefault();
         const contact = {
@@ -21,15 +19,14 @@ export const Demo = () => {
             address: address,
         };
         const config = {
-            method: "PUT",
+            method: "POST",
             body: JSON.stringify(contact),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         };
-
-        fetch(`https://playground.4geeks.com/contact/agendas/Sergio/contacts/${store.contactToEdit.id}`, config)
+        fetch("https://playground.4geeks.com/contact/agendas/Sergio/contacts", config)
             .then((response) => response.text())
             .then((result) => {
                 console.log(result);
@@ -38,18 +35,18 @@ export const Demo = () => {
                 setEmail("");
                 setAddress("");
                 setPhone("");
-				fetch ('https://playground.4geeks.com/contact/agendas/Sergio/contacts')
-						.then((response)=> response.json() )
-						.then((data)=> actions.setContacts(data.contacts))
+                fetch ('https://playground.4geeks.com/contact/agendas/Sergio/contacts')
+                        .then((response)=> response.json() )
+                        .then((data)=> actions.setContacts(data.contacts))
             })
             .catch((error) => console.error(error));
     }
-
     return (
-        <div className="container">
+        <div className="container ">
+            <div className="container">
             <div className="row">
                 <div className="col text-center fs-1 fw-bold">
-                   Edit contact
+                    Añadir Contacto
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
@@ -71,6 +68,11 @@ export const Demo = () => {
                 </div>
                 <button type="submit" className="btn btn-primary mt-3">Save Contact</button>
             </form>
+        </div>
+            <br />
+            <Link to="/">
+                <button className="btn btn-primary">Back home</button>
+            </Link>
         </div>
     );
 };
