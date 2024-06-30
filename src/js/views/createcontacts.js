@@ -66,7 +66,7 @@ export const CreateContact = props => {
                     <label htmlFor="address" className="fw-bold">Address</label>
                     <input type="text" className="form-control" id="address" placeholder="Enter address" value={address} onChange={(e) => setAddress(e.target.value)} required />
                 </div>
-                <button type="submit" className="btn btn-primary mt-3">Save Contact</button>
+                <button type="submit" className="btn btn-success mt-3">Save Contact</button>
             </form>
         </div>
             <br />

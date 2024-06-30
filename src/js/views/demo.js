@@ -5,7 +5,7 @@ import "../../styles/home.css";
 export const Demo = () => {
     const { store, actions } = useContext(Context);
 
-    const details =store.contactToEdit;
+    const details = store.contactToEdit;
 
     const [name, setName] = useState(details.name || "");
     const [email, setEmail] = useState(details.email || "");
@@ -38,9 +38,9 @@ export const Demo = () => {
                 setEmail("");
                 setAddress("");
                 setPhone("");
-				fetch ('https://playground.4geeks.com/contact/agendas/Sergio/contacts')
-						.then((response)=> response.json() )
-						.then((data)=> actions.setContacts(data.contacts))
+                fetch('https://playground.4geeks.com/contact/agendas/Sergio/contacts')
+                    .then((response) => response.json())
+                    .then((data) => actions.setContacts(data.contacts))
             })
             .catch((error) => console.error(error));
     }
@@ -49,7 +49,7 @@ export const Demo = () => {
         <div className="container">
             <div className="row">
                 <div className="col text-center fs-1 fw-bold">
-                   Edit contact
+                    Edit contact
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
@@ -69,7 +69,7 @@ export const Demo = () => {
                     <label htmlFor="address" className="fw-bold">Address</label>
                     <input type="text" className="form-control" id="address" placeholder="Enter address" value={address} onChange={(e) => setAddress(e.target.value)} required />
                 </div>
-                <button type="submit" className="btn btn-primary mt-3">Save Contact</button>
+                <button type="submit" className="btn btn-success mt-3">Save changes</button>
             </form>
         </div>
     );

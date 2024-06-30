@@ -13,8 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			Agenda:[],
-			contacts:[],
+			Agenda: [],
+			contacts: [],
 			contactToEdit: {
 				id: "",
 				name: "",
@@ -28,49 +28,71 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
-				console.log("Se carga la api desde flux")
-				setStore ({contacts:[]});
-				
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-				fetch(`https://playground.4geeks.com/contact/agendas/Sergio/contacts`)
-					.then((response) => response.json())
-					.then((data)=> setStore({contacts : data.contacts }))
-				
+			loadSomeData: async () => {
+				console.log("Se carga la api desde flux");
+				setStore({ contacts: [] });
+
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Sergio/contacts`);
+					const data = await response.json();
+					setStore({ contacts: data.contacts });
+				} catch (error) {
+					console.error('Error fetching data:', error);
+
+					// Puedes manejar el error aquí según sea necesario
+				}
 			},
-			
-			setContacts: (contacts) => { 
+
+			loadSomeData: async () => {
+				console.log("Se carga la api desde flux");
+				setStore({ contacts: [] });
+
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Sergio/contacts`);
+					const data = await response.json();
+					setStore({ contacts: data.contacts });
+				} catch (error) {
+					console.error('Error fetching data:', error);
+
+					// Puedes manejar el error aquí según sea necesario
+				}
+			},
+
+
+
+
+
+
+			setContacts: (contacts) => {
 				setStore({ contacts: contacts })
 			},
-			
+
 			createContactList: async () => {
 				const actions = getActions();
 				await fetch(
-					"https://playground.4geeks.com/contact/agendas/Sergio", { 
-						method: "POST",
-					}
+					"https://playground.4geeks.com/contact/agendas/Sergio", {
+					method: "POST",
+				}
 				);
-				actions.getContacts(); 
+				actions.getContacts();
 			},
 
 			getContacts: async () => {
-				const actions = getActions();				
-					const response = await fetch(
-						"https://playground.4geeks.com/contact/agendas/Sergio"
-					);
-					if (!response.ok) {
-				actions.createContactList();
-					} else {
-						createContactList();
-					}
-					const data = await response.json();
-					setStore({
-						Contacts: data.contacts,
-					})
-					
-				
+				const actions = getActions();
+				const response = await fetch(
+					"https://playground.4geeks.com/contact/agendas/Sergio"
+				);
+				if (!response.ok) {
+					actions.createContactList();
+				} else {
+					createContactList();
+				}
+				const data = await response.json();
+				setStore({
+					Contacts: data.contacts,
+				})
+
+
 			},
 
 			postContact: async (inputName, inputPhone, inputEmail, inputAddress) => {
@@ -90,13 +112,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					alert("contacto creado correctamente")
 					actions.getContacts();
-				}else {
+				} else {
 					alert("no se puede crear");
 				}
 
 			},
 
-			setIdForUpdate: async (id, name, address, phone, email)=>{
+			setIdForUpdate: async (id, name, address, phone, email) => {
 				setStore({
 					contact2: {
 						id: id,
@@ -112,7 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			putContact: async (inputName, inputPhone, inputEmail, inputAddress) => {
 				const actions = getActions();
 				const store = getStore();
-				
+
 				const response = await fetch('https://playground.4geeks.com/contact/agendas/Sergio/contacts' + `${store.contactToEdit.id}`, {
 					method: "PUT",
 					body: JSON.stringify({
@@ -128,19 +150,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					alert("contacto actualizado correctamente")
 					actions.getContacts();
-				}else {
+				} else {
 					alert("no se puede actualizar");
 				}
 			},
 
 			deleteContact: async (id) => {
 				const actions = getActions();
-				const response = await fetch('https://playground.4geeks.com/contact/agendas/Sergio/contacts/' + `${id}`,{
+				const response = await fetch('https://playground.4geeks.com/contact/agendas/Sergio/contacts/' + `${id}`, {
 					method: "DELETE",
 				})
 				if (!response.ok) {
 					alert("no se puede eliminar");
-				}else {
+				} else {
 					actions.getContacts();
 				}
 			},
