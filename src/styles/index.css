@@ -1,3 +1,23 @@
 /* 
     General Styles
 */
+body *  {
+background-color: black;
+color:white;
+font-weight: bold;
+}
+
+nav{
+    color:white;
+    background-color: black;
+}
+
+.list-group-item{
+    background-color: black;
+    margin-bottom: 10px;
+    border: 5px;
+    border-color: blue;
+}
+.img-circle{
+    border-radius: 100px;
+}
