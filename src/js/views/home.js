@@ -29,9 +29,9 @@ export const Home = () => {
                             >
                                 <div className="row">
                                     <div className="col">
-                                        <img src="https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg " width="140" height="140" className="img-circle mt-2" id="imagenContacto"></img>
+                                        <img src="https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg " className="img-circle mt-2" id="imagenContacto"></img>
                                     </div>
-                                    <div className="col mx-5 my-4">
+                                    <div className="data col my-4">
                                         <div className="row">
                                             <div className="col">
                                             </div>
@@ -57,7 +57,7 @@ export const Home = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col d-flex justify-content-end pt-5 mx-0">
+                                    <div className="icons col ">
                                         <div>
                                             <Link to="/demo">
                                                 <button className="btn btn mx-2 " onClick={() => setContactToEdit(contacts)}>
