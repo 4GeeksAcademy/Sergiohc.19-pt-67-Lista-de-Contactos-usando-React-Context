@@ -38,3 +38,11 @@ nav{
     padding-right: none;
     margin-right: none;
 }
+
+button {
+    transition: transform 0.5s ease; /* Transición suave de 0.3 segundos */
+}
+
+button:hover {
+    transform: scale(1.4); /* Aumenta el tamaño del botón al 110% */
+}
