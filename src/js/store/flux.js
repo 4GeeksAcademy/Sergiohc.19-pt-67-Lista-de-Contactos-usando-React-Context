@@ -43,25 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			loadSomeData: async () => {
-				console.log("Se carga la api desde flux");
-				setStore({ contacts: [] });
-
-				try {
-					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Sergio/contacts`);
-					const data = await response.json();
-					setStore({ contacts: data.contacts });
-				} catch (error) {
-					console.error('Error fetching data:', error);
-
-					// Puedes manejar el error aquí según sea necesario
-				}
-			},
-
-
-
-
-
+			
 
 			setContacts: (contacts) => {
 				setStore({ contacts: contacts })
@@ -164,7 +146,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					alert("no se puede eliminar");
 				} else {
 					actions.getContacts();
+					
 				}
+				
 			},
 			changeColor: (index, color) => {
 				//get the store
